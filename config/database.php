@@ -70,21 +70,6 @@ return [
             'sslmode' => 'prefer',
         ],
 
-        'mysqlroot' => [
-            'driver' => 'mysql',
-            'host' => env('DB_HOST_ROOT', '127.0.0.1'),
-            'port' => env('DB_PORT_ROOT', '3306'),
-            'database' => env('DB_DATABASE_ROOT', 'masterdbimc'),
-            'username' => env('DB_USERNAME_ROOT', ''),
-            'password' => env('DB_PASSWORD_ROOT', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8_general_ci',
-            'prefix' => '',
-            'strict' => false,
-            'engine' => null,
-        ],
-
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'host' => env('DB_HOST', 'localhost'),
