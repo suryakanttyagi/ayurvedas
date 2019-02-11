@@ -15,7 +15,7 @@ class CreateProductMetaDatasTable extends Migration
     {
         Schema::create('product_meta_datas', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('product_code')->unique();
+            // $table->bigInteger('product_code')->unique();
             $table->string('product_name')->unique();
             $table->string('product_category')->nullable();
             $table->string('customer_type')->nullable();
