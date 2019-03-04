@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::post('addproducttodb', 'ProductController@addProductToDb');
+Route::post('uploadproductimage','ProductController@uploadProductImage');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 use App\Model\ProductMetaData;
 use App\Model\HomeCareProducts;
@@ -42,7 +43,7 @@ class ProductManageController extends Controller
                       'product_name'=>$request->get('product_name'),
                       'product_category'=>$request->get('product_category'),
                       'customer_type'=>$request->get('customer_type'),
-                      'active_flag'=>$request->get('active_flag'),
+                      // 'active_flag'=>$request->get('active_flag'),
                       'product_details'=>$request->get('product_details'),
                       'product_keywords'=>$request->get('product_keywords'),
                       'product_prescription'=>$request->get('product_prescription'),
@@ -75,3 +76,29 @@ class ProductManageController extends Controller
         }
     }
 }
+
+
+/*
+  Add product image to the destination folder
+*/
+public function uploadCompanyProfile(Request $request)
+{
+      $validator=Validator::make($request->toArray(),[
+              'file' => 'required|mimes:jpeg,png,jpg,gif,svg|max:1024',
+          ]
+      );
+      if($validator->fails()){
+          return response()->json(['rsBody' => ['result' =>'Business Error','msg' => 'Either file format or file size is not correct']]);
+      }
+
+      if ($request->hasFile('file'))
+      {
+          $image = $request->file('file');
+          $name = $image->getClientOriginalName();
+          $destinationPath = $_ENV['IMC_PRODUCT_PICTURE_STORE_PATH'];
+          //$image->move($destinationPath, time().'.'.$name);
+          $image->move($destinationPath, $name);
+          $basePath = $_ENV['IMC_PRODUCT_PICTURE_STORE_PATH'].$name;
+      }
+      return response()->json(['rsBody' => ['result' => 'success','filePath'=>$basePath,'fileName'=>$name,'DBName'=>$name]]);
+    }
