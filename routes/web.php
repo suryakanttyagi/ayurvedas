@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::post('addproducttodb', 'ProductController@addProductToDb');
-Route::post('uploadproductimage','ProductController@uploadProductImage');
+// Route::get('/', function () {
+//     return view('create');
+// });
+Route::post('users','ProductManageController@store');
+Route::post('addproducttodb', 'ProductManageController@addProductToDb');
+Route::post('uploadproductimage','ProductManageController@uploadProductImage');
