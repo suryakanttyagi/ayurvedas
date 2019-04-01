@@ -39,11 +39,13 @@ class ProductManageController extends Controller
                     array(
                       'product_name'=>$request->input('rqBody.product_name'),
                       'product_category'=>$request->input('rqBody.product_category'),
-                      'customer_type'=>$request->input('rqBody.customer_type'),
-                      'active_flag'=>$request->input('rqBody.active_flag')
+                      // 'customer_type'=>$request->input('rqBody.customer_type'),
+                      // 'active_flag'=>1
                     )
                 );
-        // ProductMetaData::insert($data);
+                // Log::info($request);
+                // Log::info($data);
+        ProductMetaData::insert($data);
 
         $data1 = array(
                     array(
@@ -51,17 +53,18 @@ class ProductManageController extends Controller
                       'product_name'=>$request->input('rqBody.product_name'),
                       'product_category'=>$request->input('rqBody.product_category'),
                       // 'customer_type'=>$request->input('customer_type'),
-                      // 'active_flag'=>$request->input('active_flag'),
+                      // 'active_flag'=>1,
                       'product_details'=>$request->input('rqBody.product_details'),
                       'product_prescription'=>$request->input('rqBody.product_prescription'),
                       'product_for_disease'=>$request->input('rqBody.product_for_disease'),
                       'product_ingredients'=>$request->input('rqBody.product_ingredients'),
                       'product_keywords'=>$request->input('rqBody.product_keywords'),
+                      'product_cost'=>$request->input('rqBody.product_cost'),
                       'imc_member_discount'=>$request->input('rqBody.imc_member_discount'),
                     )
                 );
-      Log::info($request->input('rqBody.product_img'));
-      Log::info($request);
+      // Log::info($request->input('rqBody.product_img'));
+      // Log::info($data1);
         $productCategory = $request->input('rqBody.product_category');
 
         switch($productCategory)

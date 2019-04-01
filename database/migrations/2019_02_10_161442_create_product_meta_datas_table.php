@@ -18,8 +18,9 @@ class CreateProductMetaDatasTable extends Migration
             // $table->bigInteger('product_code')->unique();
             $table->string('product_name')->unique();
             $table->string('product_category')->nullable();
-            $table->string('customer_type')->nullable();
-            $table->boolean('active_flag');
+            $table->string('product_image')->nullable();
+            // $table->string('customer_type')->nullable();
+            // $table->boolean('active_flag');
             $table->timestamps();
         });
     }
