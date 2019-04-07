@@ -26,15 +26,15 @@ class CreateBeautyCareProductsTable extends Migration
             $table->longText('product_for_disease')->nullable();
             $table->longText('product_ingredients')->nullable();
 
-            $table->string('product_category');
+            $table->string('product_category')->nullable();
             // $table->string('customer_type')->nullable();
             // $table->boolean('active_flag');
             // $table->boolean('discount_flag');
 
-            $table->integer('product_cost');
-            $table->integer('imc_member_discount');
+            $table->integer('product_cost')->nullable();
+            $table->integer('imc_member_discount')->nullable();
 
-            $table->longText('product_image');
+            $table->longText('product_image')->nullable();
 
             $table->timestamps();
         });

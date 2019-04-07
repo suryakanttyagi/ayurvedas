@@ -9,6 +9,7 @@ use App\Model\ProductMetaData;
 use App\Model\HomeCareProducts;
 use App\Model\BeautyCareProducts;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class ProductManageController extends Controller
 {
@@ -37,20 +38,22 @@ class ProductManageController extends Controller
 
         $data = array(
                     array(
-                      'product_name'=>$request->input('rqBody.product_name'),
+                      'product_image'=>$request->input('rqBody.product_image'),
+                      'product_name'=>strtolower(trim($request->input('rqBody.product_name'))),
                       'product_category'=>$request->input('rqBody.product_category'),
+                      'created_at'=>Carbon::now()->toDateTimeString(),
+                      'updated_at'=>Carbon::now()->toDateTimeString(),
                       // 'customer_type'=>$request->input('rqBody.customer_type'),
                       // 'active_flag'=>1
                     )
                 );
                 // Log::info($request);
                 // Log::info($data);
-        ProductMetaData::insert($data);
 
         $data1 = array(
                     array(
                       'product_image'=>$request->input('rqBody.product_image'),
-                      'product_name'=>$request->input('rqBody.product_name'),
+                      'product_name'=>strtolower(trim($request->input('rqBody.product_name'))),
                       'product_category'=>$request->input('rqBody.product_category'),
                       // 'customer_type'=>$request->input('customer_type'),
                       // 'active_flag'=>1,
@@ -61,6 +64,8 @@ class ProductManageController extends Controller
                       'product_keywords'=>$request->input('rqBody.product_keywords'),
                       'product_cost'=>$request->input('rqBody.product_cost'),
                       'imc_member_discount'=>$request->input('rqBody.imc_member_discount'),
+                      'created_at'=>Carbon::now()->toDateTimeString(),
+                      'updated_at'=>Carbon::now()->toDateTimeString(),
                     )
                 );
       // Log::info($request->input('rqBody.product_img'));
@@ -71,19 +76,25 @@ class ProductManageController extends Controller
         {
           case 'home_care':
           {
-            // HomeCareProducts::insert($data1);
+            ProductMetaData::insert($data);
+            HomeCareProducts::insert($data1);
             Log::info('home care');
+            return response()->json(['rsBody' => ['result' =>'success','msg' => 'Saved successfully']]);
+
           }
           break;
 
           case 'beauty_care':
           {
-            // BeautyCareProducts::insert($data1);
+            ProductMetaData::insert($data);
+            BeautyCareProducts::insert($data1);
             Log::info('beauty care');
+            return response()->json(['rsBody' => ['result' =>'success','msg' => 'Saved successfully']]);
           }
           break;
 
           default:
+            return response()->json(['rsBody' => ['result' =>'error','msg' => 'Something went wrong while saving']]);
           break;
 
         }

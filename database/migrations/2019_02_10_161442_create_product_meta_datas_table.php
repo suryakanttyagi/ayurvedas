@@ -21,6 +21,7 @@ class CreateProductMetaDatasTable extends Migration
             $table->string('product_image')->nullable();
             // $table->string('customer_type')->nullable();
             // $table->boolean('active_flag');
+
             $table->timestamps();
         });
     }
